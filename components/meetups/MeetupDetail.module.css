@@ -1,5 +1,7 @@
 .detail {
   text-align: center;
+  background-color: white;
+  padding: 0 0 1rem;
 }
 
 .detail img {

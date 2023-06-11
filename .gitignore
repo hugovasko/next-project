@@ -1,0 +1,19 @@
+# dependencies
+/node_modules
+package-lock.json
+
+# Ignore Next.js build output
+.next
+
+# production
+/build
+
+# Ignore environment variables
+.env
+
+# Ignore other unnecessary files for a Next.js project
+.DS_Store
+.npmignore
+yarn-error.log
+*.pem
+*.log

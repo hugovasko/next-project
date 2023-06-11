@@ -1,21 +1,26 @@
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 import { MongoClient, ObjectId } from "mongodb";
+import Head from "next/head";
 
 const MeetupDetails = (props) => {
   return (
-    <MeetupDetail
-      image={props.meetupData.image}
-      title={props.meetupData.title}
-      address={props.meetupData.address}
-      description={props.meetupData.description}
-    />
+    <>
+      <Head>
+        <title>{props.meetupData.title}</title>
+        <meta name="description" content={props.meetupData.description} />
+      </Head>
+      <MeetupDetail
+        image={props.meetupData.image}
+        title={props.meetupData.title}
+        address={props.meetupData.address}
+        description={props.meetupData.description}
+      />
+    </>
   );
 };
 
 export const getStaticPaths = async () => {
-  const client = await MongoClient.connect(
-    "mongodb+srv://hugovasko:vAMsVlfaWXitXX1m@nextcluster.1cfh4ti.mongodb.net/meetups?retryWrites=true&w=majority"
-  );
+  const client = await MongoClient.connect(process.env.NEXT_PUBLIC_MONGODB_URI);
   const db = client.db();
 
   const meetupsCollection = db.collection("meetups");
@@ -35,9 +40,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context) => {
   const meetupId = context.params.meetupId;
 
-  const client = await MongoClient.connect(
-    "mongodb+srv://hugovasko:vAMsVlfaWXitXX1m@nextcluster.1cfh4ti.mongodb.net/meetups?retryWrites=true&w=majority"
-  );
+  const client = await MongoClient.connect(process.env.NEXT_PUBLIC_MONGODB_URI);
   const db = client.db();
 
   const meetupsCollection = db.collection("meetups");
