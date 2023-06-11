@@ -1,14 +1,24 @@
 import MeetupList from "../components/meetups/MeetupList";
 import { MongoClient } from "mongodb";
+import Head from "next/head";
 
 const HomePage = (props) => {
-  return <MeetupList meetups={props.meetups} />;
+  return (
+    <>
+      <Head>
+        <title>Next Meetups</title>
+        <meta
+          name="description"
+          content="Browse a huge list of highly active Next meetups!"
+        />
+      </Head>
+      <MeetupList meetups={props.meetups} />
+    </>
+  );
 };
 
 export const getStaticProps = async () => {
-  const client = await MongoClient.connect(
-    "mongodb+srv://hugovasko:vAMsVlfaWXitXX1m@nextcluster.1cfh4ti.mongodb.net/meetups?retryWrites=true&w=majority"
-  );
+  const client = await MongoClient.connect(process.env.NEXT_PUBLIC_MONGODB_URI);
   const db = client.db();
 
   const meetupsCollection = db.collection("meetups");
