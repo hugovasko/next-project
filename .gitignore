@@ -10,6 +10,7 @@ package-lock.json
 
 # Ignore environment variables
 .env
+.env.local
 
 # Ignore other unnecessary files for a Next.js project
 .DS_Store
